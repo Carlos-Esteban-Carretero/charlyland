@@ -1,0 +1,34 @@
+IMÁGENES DE CHARLYLAND
+======================
+
+1-logo
+  emblema.png ............ Emblema (512x512, fondo transparente). Icono del servidor, Discord y Steam.
+  logo-cuadrado.png ...... Emblema + nombre con fondo (512x512). Avatar de Discord, Steam o Tebex.
+  logo-horizontal.png .... Emblema + nombre + lema (transparente). Web, Tebex y cabeceras.
+  logo-texto.png ......... Solo el nombre CHARLYLAND (transparente).
+
+2-servidor
+  cabecera-servidor-512x256.png .. Imagen del servidor en la lista de servidores de Rust (server.headerimage).
+  banner-1920x480.png ............ Cabecera para Tebex, Discord o la web.
+  promo-1200x675.png ............. Anuncio para Discord y redes sociales.
+
+3-bienvenida
+  bienvenida-1280x720.png ........ Pantalla al entrar al servidor (plugin CharlyBienvenida, comando /info).
+
+4-kits
+  kit-*.png (512x512) ............ Icono de cada kit: en el juego (/kit -> editar -> "URL del icono") y en Tebex.
+    Gratis: autokit, bienvenida, diario, constructor, granjero, cazador, medico, electricista, veterano, cazazombis
+    Premium (pago): defensa, raid, raid-pro
+    VIP: vip1, vip2, vip3
+
+5-botones
+  boton-mochila.png .............. Botón de la mochila (plugin Backpacks), sin fondo.
+  boton-mochila-con-fondo.png .... Igual, con fondo oscuro.
+  boton-tienda.png ............... Botón de la tienda (GUIShop), sin fondo / con fondo.
+  icono-*.png .................... Comprar, vender, flechas y cerrar de la tienda.
+  tienda-fondo-1920x1080.png ..... Fondo de la tienda.
+
+CRÉDITOS (obligatorio mencionarlos en la web o en Tebex)
+  Iconos: game-icons.net (Lorc, Delapouite y otros) - licencia CC BY 3.0
+          Material Design Icons (Pictogrammers) - licencia Apache 2.0
+  Letras: Black Ops One, Bebas Neue, Barlow Condensed, Russo One (Google Fonts, licencia OFL)
