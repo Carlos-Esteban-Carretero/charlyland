@@ -32,6 +32,9 @@ IMÁGENES DE CHARLYLAND
   letrero.png .................... Letrero del tejado del área de descanso (cartel de madera enorme, fondo transparente).
   cuadro-logo.png ................ Cuadro del comedor (paisaje al anochecer con el emblema).
   cuadro-comandos.png ............ Cuadro de la zona de juegos con los comandos útiles.
+  neon-logo.png .................. Neón grande del tejado con el emblema (fondo transparente).
+  neon-charly.png / neon-land.png  Neones del tejado con el nombre CHARLY y LAND.
+  cartel-carretera.png ........... Cartel con tejadillo junto a la carretera.
   (Los usa el plugin CharlyDescanso: los descarga el servidor y los pinta en los carteles.)
 
 CRÉDITOS (obligatorio mencionarlos en la web o en Tebex)
