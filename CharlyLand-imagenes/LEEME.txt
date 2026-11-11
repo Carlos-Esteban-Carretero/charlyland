@@ -35,6 +35,8 @@ IMÁGENES DE CHARLYLAND
   neon-logo.png .................. Neón grande del tejado con el emblema (fondo transparente).
   neon-charly.png / neon-land.png  Neones del tejado con el nombre CHARLY y LAND.
   cartel-carretera.png ........... Cartel con tejadillo junto a la carretera.
+  *-256.png / *-512.png ........... Las mismas al tamaño que acepta cada cartel del juego (son las que usa el servidor):
+                                   neón grande 256x256, neones de texto 256x128, cuadros 256x192, cartel con tejadillo 512x256.
   (Los usa el plugin CharlyDescanso: los descarga el servidor y los pinta en los carteles.)
 
 CRÉDITOS (obligatorio mencionarlos en la web o en Tebex)
