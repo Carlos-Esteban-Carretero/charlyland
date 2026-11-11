@@ -40,6 +40,8 @@ IMÁGENES DE CHARLYLAND
   neon-*-v2.png ................... Neones del tejado nítidos (sin halo: el neón del juego ya brilla solo).
   bandera-espana.png ............. Bandera de España en vertical para el mástil (256x1024).
   banderola-charlyland.png ....... Banderola de CharlyLand para el otro mástil (256x1024).
+  tablon-comandos-1/2.png ........ Tablones grandes de fuera con todos los comandos (512x512).
+  helipuerto-1/2.png ............. El helipuerto del tejado en dos tiras (1024x256 cada una).
   (Los usa el plugin CharlyDescanso: los descarga el servidor y los pinta en los carteles.)
 
 CRÉDITOS (obligatorio mencionarlos en la web o en Tebex)
