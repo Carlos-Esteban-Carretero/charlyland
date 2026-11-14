@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CharlyLand · Servidor de Rust PVE x3 en español con zombis</title>
+<meta name="description" content="CharlyLand es un servidor de Rust PVE x3 en español: aquí no te raidean otros jugadores, te raidean los zombis. Niveles que no se pierden, eventos, bases raideables, kits y áreas de descanso.">
+<meta property="og:title" content="CharlyLand · Rust PVE x3 en español con zombis">
+<meta property="og:description" content="Aquí no te raidean otros jugadores: te raidean los zombis. Niveles que no se pierden, eventos y bases raideables.">
+<meta property="og:image" content="https://raw.githubusercontent.com/Carlos-Esteban-Carretero/charlyland/main/CharlyLand-imagenes/2-servidor/promo-1200x675.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="https://raw.githubusercontent.com/Carlos-Esteban-Carretero/charlyland/main/CharlyLand-imagenes/1-logo/icono-servidor-256.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d0e11;
+  --bg2: #15171c;
+  --card: #1b1e24;
+  --line: #2a2e36;
+  --text: #ece6da;
+  --muted: #a39e94;
+  --orange: #f27a1a;
+  --orange2: #ff9a3d;
+  --ok: #5fbf6a;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 17px/1.6 "Barlow", system-ui, sans-serif;
+}
+a { color: var(--orange2); }
+img { max-width: 100%; display: block; }
+.wrap { width: min(1120px, 100% - 32px); margin-inline: auto; }
+h1, h2, h3 { font-family: "Black Ops One", "Barlow", sans-serif; font-weight: 400; letter-spacing: .5px; line-height: 1.15; }
+h2 { font-size: clamp(26px, 4vw, 38px); margin: 0 0 8px; }
+h2 span { color: var(--orange); }
+.kicker { color: var(--orange); font-weight: 700; letter-spacing: 3px; text-transform: uppercase; font-size: 13px; }
+section { padding: 72px 0; border-top: 1px solid var(--line); }
+.lead { color: var(--muted); max-width: 720px; }
+
+/* Barra superior */
+.top {
+  position: sticky; top: 0; z-index: 10;
+  background: rgba(13, 14, 17, .92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.top .wrap { display: flex; align-items: center; gap: 20px; height: 64px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); font-family: "Black Ops One", sans-serif; font-size: 22px; }
+.brand img { width: 36px; height: 36px; }
+.brand b { color: var(--orange); font-weight: 400; }
+.nav { display: flex; gap: 18px; margin-left: auto; }
+.nav a { color: var(--muted); text-decoration: none; font-weight: 600; font-size: 15px; }
+.nav a:hover { color: var(--text); }
+@media (max-width: 820px) { .nav { display: none; } }
+
+/* Botones */
+.btns { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 22px; border-radius: 8px;
+  font-weight: 700; text-decoration: none; font-size: 16px;
+  border: 2px solid var(--orange); color: var(--text); background: transparent;
+  cursor: pointer; font-family: inherit;
+}
+.btn.main { background: var(--orange); color: #1a0e04; }
+.btn:hover { filter: brightness(1.12); }
+.top .btn { padding: 8px 16px; font-size: 14px; }
+
+/* Portada */
+.hero { position: relative; padding: 0 0 56px; border-top: 0; }
+.hero .banner { width: 100%; aspect-ratio: 4 / 1; object-fit: cover; object-position: center; }
+.hero .wrap { margin-top: -6px; }
+.hero h1 { font-size: clamp(30px, 5.4vw, 56px); margin: 28px 0 12px; }
+.hero h1 span { color: var(--orange); }
+.hero p.sub { font-size: clamp(18px, 2.3vw, 22px); color: var(--muted); margin: 0 0 26px; max-width: 760px; }
+
+/* Ficha del servidor */
+.server {
+  margin-top: 34px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+  background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
+}
+.server > div { background: var(--bg2); padding: 18px 20px; }
+.server .label { color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 2px; }
+.server .value { font-weight: 700; font-size: 19px; margin-top: 4px; }
+.server code { font: 700 17px/1.4 ui-monospace, Menlo, Consolas, monospace; color: var(--orange2); }
+.copy { margin-left: 8px; font: 600 13px "Barlow", sans-serif; background: var(--card); color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: 3px 9px; cursor: pointer; }
+@media (max-width: 820px) { .server { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .server { grid-template-columns: 1fr; } }
+
+/* Tarjetas */
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-top: 30px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 22px; }
+.card h3 { margin: 0 0 8px; font-size: 21px; color: var(--orange2); }
+.card p { margin: 0; color: var(--muted); }
+.card ul { margin: 0; padding-left: 18px; color: var(--muted); }
+.card li { margin: 3px 0; }
+
+/* Pasos */
+.steps { counter-reset: s; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-top: 30px; }
+.step { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 22px 22px 22px 70px; position: relative; }
+.step::before { counter-increment: s; content: counter(s); position: absolute; left: 20px; top: 18px; font-family: "Black Ops One", sans-serif; font-size: 34px; color: var(--orange); }
+.step h3 { margin: 0 0 6px; font-size: 19px; }
+.step p { margin: 0; color: var(--muted); }
+.step code { color: var(--orange2); }
+
+/* Comandos */
+.cmds { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-top: 30px; }
+.cmds details { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 0 20px; }
+.cmds summary { cursor: pointer; padding: 16px 0; font-family: "Black Ops One", sans-serif; font-size: 18px; color: var(--orange2); list-style: none; }
+.cmds summary::-webkit-details-marker { display: none; }
+.cmds summary::after { content: "+"; float: right; color: var(--muted); }
+.cmds details[open] summary::after { content: "–"; }
+.cmds table { width: 100%; border-collapse: collapse; margin-bottom: 14px; }
+.cmds td { padding: 6px 0; border-top: 1px solid var(--line); vertical-align: top; }
+.cmds td:first-child { white-space: nowrap; padding-right: 14px; font: 600 15px ui-monospace, Menlo, Consolas, monospace; color: var(--text); }
+.cmds td:last-child { color: var(--muted); }
+
+/* Wipe */
+.wipe { display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; align-items: center; margin-top: 26px; }
+.count { display: flex; gap: 12px; }
+.count div { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 10px; min-width: 78px; text-align: center; }
+.count b { display: block; font-family: "Black Ops One", sans-serif; font-size: 34px; color: var(--orange); font-weight: 400; }
+.count span { color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 2px; }
+@media (max-width: 820px) { .wipe { grid-template-columns: 1fr; } }
+
+/* Normas y preguntas */
+.rules { list-style: none; padding: 0; margin: 26px 0 0; display: grid; gap: 10px; }
+.rules li { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--orange); border-radius: 8px; padding: 14px 18px; }
+.faq details { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 0 20px; margin-top: 12px; }
+.faq summary { cursor: pointer; padding: 15px 0; font-weight: 700; }
+.faq p { margin: 0 0 16px; color: var(--muted); }
+
+/* Llamada final y pie */
+.cta { text-align: center; }
+.cta .btns { justify-content: center; margin-top: 22px; }
+footer { border-top: 1px solid var(--line); padding: 30px 0 40px; color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 14px; justify-content: space-between; align-items: center; }
+footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#"><img src="https://raw.githubusercontent.com/Carlos-Esteban-Carretero/charlyland/main/CharlyLand-imagenes/1-logo/emblema.png" alt="">CHARLY<b>LAND</b></a>
+    <nav class="nav">
+      <a href="#servidor">El servidor</a>
+      <a href="#entrar">Cómo entrar</a>
+      <a href="#comandos">Comandos</a>
+      <a href="#wipe">Wipe</a>
+      <a href="#normas">Normas</a>
+    </nav>
+    <a class="btn main" href="https://discord.gg/tXrA9CRJwp" target="_blank" rel="noopener">Discord</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <img class="banner" src="https://raw.githubusercontent.com/Carlos-Esteban-Carretero/charlyland/main/CharlyLand-imagenes/2-servidor/banner-1920x480.png" alt="CharlyLand · PVE x3 · Niveles · Zombis · Bases raideables · Kits">
+    <div class="wrap">
+      <h1>Rust PVE x3 en español, <span>con zombis</span></h1>
+      <p class="sub">Aquí no te raidean otros jugadores: te raidean los zombis. Hordas de día y de noche, asaltos a tu base y una progresión que no se pierde en cada wipe.</p>
+      <div class="btns">
+        <a class="btn main" href="steam://connect/5.9.36.114:29010">▶ Jugar ahora</a>
+        <a class="btn" href="https://discord.gg/tXrA9CRJwp" target="_blank" rel="noopener">Únete al Discord</a>
+        <a class="btn" href="https://rust-servers.net/server/178644/vote/" target="_blank" rel="noopener">Vota y gana premios</a>
+      </div>
+      <div class="server" aria-label="Datos del servidor">
+        <div><div class="label">Dirección</div><div class="value"><code id="ip">5.9.36.114:29010</code><button class="copy" type="button" data-copy="client.connect 5.9.36.114:29010">Copiar</button></div></div>
+        <div><div class="label">Modo</div><div class="value">PVE · x3 · Zombis</div></div>
+        <div><div class="label">Idioma</div><div class="value">Español · Europa</div></div>
+        <div><div class="label">Próximo wipe</div><div class="value" id="wipe-short">Primer jueves de mes</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="servidor">
+    <div class="wrap">
+      <div class="kicker">El servidor</div>
+      <h2>Qué te espera en <span>CharlyLand</span></h2>
+      <p class="lead">Un mundo que no perdona, pero en el que lo que consigues se queda contigo: tus niveles, tus monedas y tu VIP sobreviven al wipe.</p>
+      <div class="grid">
+        <div class="card"><h3>Zombis y asaltos</h3><p>Hordas por todo el mapa de día y de noche, jefes zombis y asaltos a tu base con cuenta atrás. Pon torretas y cierra las puertas.</p></div>
+        <div class="card"><h3>Progreso que no se pierde</h3><ul><li>Niveles hasta el 999 y habilidades</li><li>Logros y títulos para el chat</li><li>Oficios: leñador, minero, pescador y granjero</li><li>Pase de temporada de 30 niveles</li></ul></div>
+        <div class="card"><h3>Eventos</h3><ul><li>El Carnicero, jefe zombi</li><li>Lluvia de suministros y caza del tesoro</li><li>Bases raideables de fácil a pesadilla</li><li>Aeródromo con tanque y helicóptero</li></ul></div>
+        <div class="card"><h3>Equipo encantado</h3><p>Armas y ropa con rareza Rara, Épica y Legendaria: golpes críticos y aspecto propio. Mejóralas con <code>/rareza</code>.</p></div>
+        <div class="card"><h3>Áreas de descanso</h3><p>Zonas seguras donde no entran ni zombis ni animales: sofá, chimenea, radio con música española y helipuerto en el tejado. Los nuevos empiezan aquí.</p></div>
+        <div class="card"><h3>Comodidades</h3><ul><li>Recolección x3 y fabricación rápida</li><li>Kits gratis, tienda y mochila de 144 huecos</li><li>/home, /tpr y mejorar la base con /up</li><li>Recupera tus cosas con /recuperar</li></ul></div>
+        <div class="card"><h3>Premios cada día</h3><p>Premio diario con racha, 3 retos al día, ranking semanal y premios por votar por el servidor.</p></div>
+        <div class="card"><h3>Una comunidad tranquila</h3><p>Admin activo, cero toxicidad y un Discord donde se escuchan las ideas de los jugadores.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="entrar">
+    <div class="wrap">
+      <div class="kicker">Cómo entrar</div>
+      <h2>Juega en <span>2 minutos</span></h2>
+      <div class="steps">
+        <div class="step"><h3>Abre Rust</h3><p>Necesitas el juego en Steam. No hace falta ningún DLC.</p></div>
+        <div class="step"><h3>Conéctate</h3><p>Pulsa <a href="steam://connect/5.9.36.114:29010">Jugar ahora</a>, o abre la consola con F1 y escribe <code>client.connect 5.9.36.114:29010</code>. También puedes buscar «CharlyLand» en la pestaña <b>Modded</b>.</p></div>
+        <div class="step"><h3>Empieza en el área de descanso</h3><p>La primera vez apareces en una zona segura. Escribe <code>/kit</code> para tu equipo y <code>/comandos</code> para ver todo.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="comandos">
+    <div class="wrap">
+      <div class="kicker">Comandos</div>
+      <h2>Todo lo que puedes <span>escribir en el chat</span></h2>
+      <div class="cmds">
+        <details open><summary>Lo básico</summary><table>
+          <tr><td>/info</td><td>Bienvenida y normas</td></tr>
+          <tr><td>/comandos</td><td>Lista de comandos en el juego</td></tr>
+          <tr><td>/wipe</td><td>Fecha del próximo wipe</td></tr>
+          <tr><td>/eventos</td><td>Ver los eventos</td></tr>
+          <tr><td>/hordeinfo</td><td>Dónde están los zombis</td></tr>
+          <tr><td>/recuperar</td><td>Recuperar tus cosas</td></tr>
+        </table></details>
+        <details open><summary>Tienda, kits y skins</summary><table>
+          <tr><td>/shop</td><td>Tienda</td></tr>
+          <tr><td>/kit</td><td>Kits gratis, VIP y de pago</td></tr>
+          <tr><td>/skin</td><td>Skin para lo que llevas</td></tr>
+          <tr><td>/backpack</td><td>Abrir tu mochila</td></tr>
+          <tr><td>/vip</td><td>Tus días de VIP</td></tr>
+        </table></details>
+        <details><summary>Tu base</summary><table>
+          <tr><td>/up</td><td>Mejorar toda la base</td></tr>
+          <tr><td>/down</td><td>Bajar el nivel</td></tr>
+          <tr><td>/remove</td><td>Quitar piezas tuyas</td></tr>
+          <tr><td>/ad</td><td>Puertas automáticas</td></tr>
+          <tr><td>/semillas</td><td>Banco de semillas</td></tr>
+        </table></details>
+        <details><summary>Teletransporte</summary><table>
+          <tr><td>/home add nombre</td><td>Guardar casa aquí</td></tr>
+          <tr><td>/home nombre</td><td>Ir a tu casa</td></tr>
+          <tr><td>/home list</td><td>Ver tus casas</td></tr>
+          <tr><td>/tpr jugador</td><td>Ir con un amigo</td></tr>
+          <tr><td>/tpa · /tpc</td><td>Aceptar o cancelar</td></tr>
+          <tr><td>/tpb</td><td>Volver atrás</td></tr>
+          <tr><td>/outpost · /bandit</td><td>Ir a Outpost o Bandidos</td></tr>
+        </table></details>
+        <details><summary>Niveles y bajas</summary><table>
+          <tr><td>/xpstats</td><td>Tus niveles y habilidades</td></tr>
+          <tr><td>/xptop</td><td>Mejores jugadores</td></tr>
+          <tr><td>/xphelp</td><td>Cómo van los niveles</td></tr>
+          <tr><td>/pkills · /topkills</td><td>Tus bajas y el ranking</td></tr>
+        </table></details>
+        <details><summary>Premios y progreso</summary><table>
+          <tr><td>/pase</td><td>Pase de temporada</td></tr>
+          <tr><td>/logros · /titulo</td><td>Logros y título del chat</td></tr>
+          <tr><td>/oficios</td><td>Leñador, minero, pescador</td></tr>
+          <tr><td>/diario</td><td>Premio diario con racha</td></tr>
+          <tr><td>/retos</td><td>3 retos al día</td></tr>
+          <tr><td>/ranking</td><td>Ranking semanal</td></tr>
+          <tr><td>/vote · /claim</td><td>Votar y cobrar el premio</td></tr>
+          <tr><td>/codigo</td><td>Regalo del Discord</td></tr>
+        </table></details>
+      </div>
+    </div>
+  </section>
+
+  <section id="wipe">
+    <div class="wrap">
+      <div class="kicker">Wipe</div>
+      <h2>Wipe <span>mensual</span></h2>
+      <div class="wipe">
+        <div>
+          <p class="lead">El mapa se reinicia el <b>primer jueves de cada mes a las 20:00</b> (hora de España), el mismo día que el wipe oficial de Rust. Tus <b>niveles, monedas y VIP se conservan</b>.</p>
+          <p class="lead" id="wipe-date"></p>
+        </div>
+        <div class="count" aria-live="polite">
+          <div><b id="cd-d">–</b><span>días</span></div>
+          <div><b id="cd-h">–</b><span>horas</span></div>
+          <div><b id="cd-m">–</b><span>min</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="normas">
+    <div class="wrap">
+      <div class="kicker">Normas</div>
+      <h2>Pocas normas, <span>pero claras</span></h2>
+      <ul class="rules">
+        <li>Respeto a todos: nada de insultos ni acoso.</li>
+        <li>Prohibido usar trampas, bugs o macros.</li>
+        <li>No bloquees monumentos ni caminos.</li>
+        <li>El admin siempre tiene la última palabra.</li>
+      </ul>
+      <div class="faq" style="margin-top:34px">
+        <h3 style="margin:0 0 6px">Preguntas frecuentes</h3>
+        <details><summary>¿Me pueden raidear otros jugadores?</summary><p>No. CharlyLand es PVE: los jugadores no pueden hacerse daño ni romper bases ajenas. El peligro son los zombis, los científicos y los animales.</p></details>
+        <details><summary>¿Pierdo mi progreso en el wipe?</summary><p>No. Tus niveles, monedas y VIP se conservan. Se reinicia el mapa, como en cualquier servidor.</p></details>
+        <details><summary>¿Necesito comprar algo?</summary><p>No. Todo se puede conseguir jugando. La tienda solo ayuda a mantener el servidor y da ventajas de comodidad.</p></details>
+        <details><summary>He muerto lejos con mis cosas. ¿Qué hago?</summary><p>Escribe <code>/recuperar</code> en el chat.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap">
+      <h2>Te esperamos en <span>CharlyLand</span></h2>
+      <p class="lead" style="margin:0 auto">Entra, coge tu kit y prepara las torretas: esta noche vienen los zombis.</p>
+      <div class="btns">
+        <a class="btn main" href="steam://connect/5.9.36.114:29010">▶ Jugar ahora</a>
+        <a class="btn" href="https://discord.gg/tXrA9CRJwp" target="_blank" rel="noopener">Discord</a>
+        <a class="btn" href="https://charlyland.tebex.store" target="_blank" rel="noopener">Tienda</a>
+        <a class="btn" href="https://rust-servers.net/server/178644/vote/" target="_blank" rel="noopener">Votar</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© CharlyLand · Servidor comunitario de Rust. No afiliado a Facepunch Studios.</span>
+    <span><a href="https://discord.gg/tXrA9CRJwp" target="_blank" rel="noopener">Discord</a> · <a href="https://charlyland.tebex.store" target="_blank" rel="noopener">Tienda</a> · <a href="https://rust-servers.net/server/178644/" target="_blank" rel="noopener">rust-servers.net</a></span>
+  </div>
+</footer>
+
+<script>
+// Copiar la orden de conexión.
+document.querySelectorAll('.copy').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var text = b.getAttribute('data-copy');
+    var done = function () { b.textContent = '¡Copiado!'; setTimeout(function () { b.textContent = 'Copiar'; }, 1800); };
+    if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, done); else done();
+  });
+});
+
+// Próximo wipe: primer jueves de cada mes a las 20:00, hora de España.
+function madridToUtc(y, m, d, h) {
+  var guess = Date.UTC(y, m, d, h, 0, 0);
+  var parts = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Madrid', hour: '2-digit', hourCycle: 'h23', day: '2-digit' }).formatToParts(new Date(guess));
+  var hh = +parts.find(function (p) { return p.type === 'hour'; }).value;
+  var dd = +parts.find(function (p) { return p.type === 'day'; }).value;
+  var diff = (dd - d) * 24 + (hh - h);
+  return guess - diff * 3600000;
+}
+function nextWipe(now) {
+  for (var i = 0; i < 3; i++) {
+    var base = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + i, 1));
+    var y = base.getUTCFullYear(), m = base.getUTCMonth();
+    for (var d = 1; d <= 7; d++) {
+      if (new Date(Date.UTC(y, m, d)).getUTCDay() === 4) {
+        var t = madridToUtc(y, m, d, 20);
+        if (t > now.getTime()) return new Date(t);
+        break;
+      }
+    }
+  }
+  return null;
+}
+function tick() {
+  var now = new Date();
+  var w = nextWipe(now);
+  if (!w) return;
+  var ms = w - now;
+  document.getElementById('cd-d').textContent = Math.floor(ms / 86400000);
+  document.getElementById('cd-h').textContent = Math.floor(ms / 3600000) % 24;
+  document.getElementById('cd-m').textContent = Math.floor(ms / 60000) % 60;
+  var txt = w.toLocaleDateString('es-ES', { timeZone: 'Europe/Madrid', weekday: 'long', day: 'numeric', month: 'long' }) + ' a las 20:00';
+  document.getElementById('wipe-date').textContent = 'Próximo wipe: ' + txt + '.';
+  document.getElementById('wipe-short').textContent = w.toLocaleDateString('es-ES', { timeZone: 'Europe/Madrid', day: 'numeric', month: 'short' }) + ' · 20:00';
+}
+tick();
+setInterval(tick, 30000);
+</script>
+</body>
+</html>
